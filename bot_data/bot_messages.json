@@ -1,0 +1,22 @@
+[
+  {
+    "id": "msg_1066137436_1750193027",
+    "telegram_id": 1066137436,
+    "username": "samandarik4",
+    "first_name": "ㅤㅤㅤㅤㅤㅤ",
+    "message": "/start",
+    "message_type": "command",
+    "timestamp": "2025-06-18T01:43:47.113053+05:00",
+    "handled": false
+  },
+  {
+    "id": "msg_1066137436_1750193061",
+    "telegram_id": 1066137436,
+    "username": "samandarik4",
+    "first_name": "ㅤㅤㅤㅤㅤㅤ",
+    "message": "/start",
+    "message_type": "command",
+    "timestamp": "2025-06-18T01:44:21.985908+05:00",
+    "handled": false
+  }
+]

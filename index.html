@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amur Restaurant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c5530;
+            --secondary-color: #4a7c59;
+            --accent-color: #f4a261;
+            --text-color: #2c3e50;
+            --bg-color: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
+            --border-radius: 16px;
+            --transition: all 0.3s ease;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .language-selector {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            padding: 0.75rem;
+            background: var(--gray-100);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            background: var(--gray-200);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+        }
+
+        .auth-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .auth-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+
+        /* Navigation Categories */
+        .nav-categories {
+            background: var(--white);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .categories-scroll {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .categories-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-pill {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border: 2px solid transparent;
+        }
+
+        .category-pill.active {
+            background: var(--primary-color);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(44, 85, 48, 0.3);
+        }
+
+        .category-pill:hover:not(.active) {
+            background: var(--gray-200);
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Search */
+        .search-section {
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 500px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+            font-size: 1.125rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 2rem;
+        }
+
+        /* Food Grid */
+        .foods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .food-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .food-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .food-image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .food-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .new-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ef4444;
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .food-card-content {
+            padding: 1.5rem;
+        }
+
+        .food-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .food-description {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .food-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .add-to-cart-btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .add-to-cart-btn:hover:not(:disabled) {
+            background: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+
+        .add-to-cart-btn:disabled {
+            background: var(--gray-300);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .rating .stars {
+            color: #fbbf24;
+            font-size: 0.875rem;
+        }
+
+        .rating-count {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+            margin-left: 0.25rem;
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            gap: 1rem;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--gray-200);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            color: var(--gray-600);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--gray-900);
+        }
+
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: var(--gray-100);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--gray-700);
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background: var(--gray-200);
+        }
+
+        .quantity-display {
+            padding: 0 0.75rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .remove-btn {
+            background: #ef4444;
+            color: var(--white);
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            margin-left: auto;
+            transition: var(--transition);
+        }
+
+        .remove-btn:hover {
+            background: #dc2626;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            background: var(--gray-50);
+        }
+
+        .cart-total {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .checkout-btn {
+            background: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: #e76f51;
+            transform: translateY(-1px);
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: var(--gray-500);
+            padding: 3rem 1.5rem;
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gray-300);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 3000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--gray-600);
+        }
+
+        .auth-switch a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: var(--white);
+            font-weight: 600;
+            z-index: 4000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: #10b981;
+        }
+
+        .notification.error {
+            background: #ef4444;
+        }
+
+        .notification.info {
+            background: #3b82f6;
+        }
+
+        /* Orders Page */
+        .order-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .order-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-content {
+            padding: 1.5rem;
+        }
+
+        .order-status {
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-confirmed { background: #dcfce7; color: #166534; }
+        .status-preparing { background: #dbeafe; color: #1e40af; }
+        .status-ready { background: #f3e8ff; color: #7c2d12; }
+        .status-delivered { background: #ecfdf5; color: #065f46; }
+        .status-cancelled { background: #fee2e2; color: #991b1b; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .foods-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .category-pill {
+                font-size: 0.8rem;
+                padding: 0.625rem 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .foods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .food-card-content {
+                padding: 1rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .header-actions {
+                justify-content: space-between;
+            }
+        }
+
+        /* Utility classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <span>Amur Restaurant</span>
+            </div>
+            <div class="header-actions">
+                <select class="language-selector" id="languageSelector">
+                    <option value="uz">O'zbek</option>
+                    <option value="ru">Русский</option>
+                    <option value="en">English</option>
+                </select>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+                <button class="auth-btn" id="authBtn" onclick="showAuthModal()">
+                    <span id="authBtnText">Kirish</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Categories -->
+    <nav class="nav-categories">
+        <div class="nav-container">
+            <div class="categories-scroll" id="categoriesContainer">
+                <!-- Categories will be loaded here -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Foods Page -->
+        <div class="page active" id="foods-page">
+            <div class="search-section">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Ovqat qidirish..." data-i18n-placeholder="search_placeholder">
+                </div>
+            </div>
+
+            <h1 class="section-title" id="currentCategoryTitle" data-i18n="all_foods">Barcha ovqatlar</h1>
+
+            <div class="loading" id="foodsLoading">
+                <div class="loading-spinner"></div>
+                <div class="loading-text" data-i18n="loading">Yuklanmoqda...</div>
+            </div>
+
+            <div class="foods-grid" id="foodsGrid">
+                <!-- Foods will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Orders Page -->
+        <div class="page" id="orders-page">
+            <h1 class="section-title" data-i18n="my_orders">Mening buyurtmalarim</h1>
+            <div class="loading" id="ordersLoading">
+                <div class="loading-spinner"></div>
+                <div class="loading-text" data-i18n="loading">Yuklanmoqda...</div>
+            </div>
+            <div id="ordersContainer">
+                <!-- Orders will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div class="page" id="profile-page">
+            <h1 class="section-title" data-i18n="profile">Profil</h1>
+            <div id="profileContainer">
+                <!-- Profile will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Admin Page -->
+        <div class="page" id="admin-page">
+            <h1 class="section-title" data-i18n="admin_panel">Admin Panel</h1>
+            <div id="adminContainer">
+                <!-- Admin content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 data-i18n="cart">Savatcha</h3>
+            <button class="close-btn" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-bag"></i>
+                <p data-i18n="empty_cart">Savat bo'sh</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total">
+                <span data-i18n="total">Jami:</span> <span id="totalAmount">0 so'm</span>
+            </div>
+            <button class="checkout-btn" onclick="showCheckoutModal()" data-i18n="order">Buyurtma berish</button>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="authModalTitle" data-i18n="login">Kirish</h3>
+                <button class="close-btn" onclick="closeModal('authModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="authForm">
+                    <div class="form-group">
+                        <label for="phoneNumber" data-i18n="phone_number">Telefon raqami</label>
+                        <input type="tel" id="phoneNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" data-i18n="password">Parol</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-group hidden" id="fullNameGroup">
+                        <label for="fullName" data-i18n="full_name">To'liq ism</label>
+                        <input type="text" id="fullName">
+                    </div>
+                    <div class="form-group hidden" id="emailGroup">
+                        <label for="email" data-i18n="email">Email</label>
+                        <input type="email" id="email">
+                    </div>
+                    <button type="submit" class="btn" id="authSubmitBtn" data-i18n="login">Kirish</button>
+                    <div class="auth-switch">
+                        <span id="authSwitchText" data-i18n="no_account">Akkountingiz yo'qmi?</span>
+                        <a href="#" onclick="switchAuthMode(); return false;" id="authSwitchLink" data-i18n="register">Ro'yxatdan o'tish</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-i18n="order_details">Buyurtma tafsilotlari</h3>
+                <button class="close-btn" onclick="closeModal('checkoutModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label data-i18n="delivery_type">Yetkazib berish turi</label>
+                        <select id="deliveryType" onchange="handleDeliveryTypeChange()">
+                            <option value="delivery" data-i18n="delivery">Yetkazib berish</option>
+                            <option value="own_withdrawal" data-i18n="pickup">O'zi olib ketish</option>
+                            <option value="atTheRestaurant" data-i18n="at_restaurant">Restoranda</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="deliveryAddressGroup">
+                        <label for="deliveryAddress" data-i18n="delivery_address">Yetkazib berish manzili</label>
+                        <textarea id="deliveryAddress" rows="3" placeholder="Manzilni kiriting"></textarea>
+                    </div>
+                    <div class="form-group hidden" id="pickupCodeGroup">
+                        <label for="pickupCode" data-i18n="pickup_code">Olib ketish kodi</label>
+                        <input type="text" id="pickupCode" placeholder="Maxsus kod">
+                    </div>
+                    <div class="form-group hidden" id="tableGroup">
+                        <label for="tableSelect" data-i18n="table">Stol</label>
+                        <select id="tableSelect">
+                            <option value="93e05d01c3304b3b9dc963db187dbb51">Zal-1 Stol-1</option>
+                            <option value="73d6827a734a43b6ad779b5979bb9c6a">Zal-1 Stol-2</option>
+                            <option value="dc6e76e87f9e42a08a4e1198fc5f89a0">Zal-1 Stol-3</option>
+                            <option value="70a53b0ac3264fce88d9a4b7d3a7fa5e">Zal-1 Stol-4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="payment_method">To'lov usuli</label>
+                        <select id="paymentMethod">
+                            <option value="cash" data-i18n="cash">Naqd</option>
+                            <option value="card" data-i18n="card">Karta</option>
+                            <option value="click" data-i18n="click">Click</option>
+                            <option value="payme" data-i18n="payme">Payme</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialInstructions" data-i18n="special_instructions">Maxsus ko'rsatmalar</label>
+                        <textarea id="specialInstructions" rows="3" placeholder="Qo'shimcha talablar"></textarea>
+                    </div>
+                    <div class="cart-total mb-4">
+                        <span data-i18n="order_total">Buyurtma jami:</span> <span id="checkoutTotal">0 so'm</span>
+                    </div>
+                    <button type="submit" class="btn checkout-btn" data-i18n="confirm_order">Buyurtmani tasdiqlash</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Global variables
+        const API_BASE_URL = 'http://0.0.0.0:8000';
+        let currentLanguage = 'uz';
+        let currentUser = null;
+        let token = localStorage.getItem('token');
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let foods = [];
+        let categories = [];
+        let isAuthMode = 'login';
+        let currentCategory = '';
+
+        // Translations
+        const translations = {
+            uz: {
+                all_foods: 'Barcha ovqatlar',
+                foods: 'Ovqatlar',
+                orders: 'Buyurtmalar',
+                profile: 'Profil',
+                admin: 'Admin',
+                search_placeholder: 'Ovqat qidirish...',
+                loading: 'Yuklanmoqda...',
+                cart: 'Savatcha',
+                empty_cart: 'Savat bo\'sh',
+                total: 'Jami:',
+                order: 'Buyurtma berish',
+                login: 'Kirish',
+                register: 'Ro\'yxatdan o\'tish',
+                phone_number: 'Telefon raqami',
+                password: 'Parol',
+                full_name: 'To\'liq ism',
+                email: 'Email',
+                no_account: 'Akkountingiz yo\'qmi?',
+                have_account: 'Akkountingiz bormi?',
+                delivery: 'Yetkazib berish',
+                pickup: 'O\'zi olib ketish',
+                at_restaurant: 'Restoranda',
+                delivery_address: 'Yetkazib berish manzili',
+                pickup_code: 'Olib ketish kodi',
+                table: 'Stol',
+                payment_method: 'To\'lov usuli',
+                cash: 'Naqd',
+                card: 'Karta',
+                click: 'Click',
+                payme: 'Payme',
+                special_instructions: 'Maxsus ko\'rsatmalar',
+                order_total: 'Buyurtma jami:',
+                confirm_order: 'Buyurtmani tasdiqlash',
+                order_details: 'Buyurtma tafsilotlari',
+                delivery_type: 'Yetkazib berish turi',
+                my_orders: 'Mening buyurtmalarim',
+                admin_panel: 'Admin Panel',
+                logout: 'Chiqish',
+                add_to_cart: 'Savatga qo\'shish',
+                all: 'Barchasi',
+                new: 'Yangi'
+            },
+            ru: {
+                all_foods: 'Все блюда',
+                foods: 'Блюда',
+                orders: 'Заказы',
+                profile: 'Профиль',
+                admin: 'Админ',
+                search_placeholder: 'Поиск блюд...',
+                loading: 'Загружается...',
+                cart: 'Корзина',
+                empty_cart: 'Корзина пуста',
+                total: 'Итого:',
+                order: 'Заказать',
+                login: 'Войти',
+                register: 'Регистрация',
+                phone_number: 'Номер телефона',
+                password: 'Пароль',
+                full_name: 'Полное имя',
+                email: 'Email',
+                no_account: 'Нет аккаунта?',
+                have_account: 'Есть аккаунт?',
+                delivery: 'Доставка',
+                pickup: 'Самовывоз',
+                at_restaurant: 'В ресторане',
+                delivery_address: 'Адрес доставки',
+                pickup_code: 'Код самовывоза',
+                table: 'Стол',
+                payment_method: 'Способ оплаты',
+                cash: 'Наличные',
+                card: 'Карта',
+                click: 'Click',
+                payme: 'Payme',
+                special_instructions: 'Особые указания',
+                order_total: 'Сумма заказа:',
+                confirm_order: 'Подтвердить заказ',
+                order_details: 'Детали заказа',
+                delivery_type: 'Тип доставки',
+                my_orders: 'Мои заказы',
+                admin_panel: 'Админ панель',
+                logout: 'Выйти',
+                add_to_cart: 'В корзину',
+                all: 'Все',
+                new: 'Новое'
+            },
+            en: {
+                all_foods: 'All Foods',
+                foods: 'Foods',
+                orders: 'Orders',
+                profile: 'Profile',
+                admin: 'Admin',
+                search_placeholder: 'Search foods...',
+                loading: 'Loading...',
+                cart: 'Cart',
+                empty_cart: 'Cart is empty',
+                total: 'Total:',
+                order: 'Order',
+                login: 'Login',
+                register: 'Register',
+                phone_number: 'Phone number',
+                password: 'Password',
+                full_name: 'Full name',
+                email: 'Email',
+                no_account: 'No account?',
+                have_account: 'Have account?',
+                delivery: 'Delivery',
+                pickup: 'Pickup',
+                at_restaurant: 'At restaurant',
+                delivery_address: 'Delivery address',
+                pickup_code: 'Pickup code',
+                table: 'Table',
+                payment_method: 'Payment method',
+                cash: 'Cash',
+                card: 'Card',
+                click: 'Click',
+                payme: 'Payme',
+                special_instructions: 'Special instructions',
+                order_total: 'Order total:',
+                confirm_order: 'Confirm order',
+                order_details: 'Order details',
+                delivery_type: 'Delivery type',
+                my_orders: 'My orders',
+                admin_panel: 'Admin Panel',
+                logout: 'Logout',
+                add_to_cart: 'Add to cart',
+                all: 'All',
+                new: 'New'
+            }
+        };
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            console.log('Initializing Amur Restaurant App...');
+            
+            if (token) {
+                validateToken();
+            }
+
+            loadCategories();
+            loadFoods();
+            updateCartUI();
+            setupEventListeners();
+            updateLanguage();
+        }
+
+        function setupEventListeners() {
+            // Language selector
+            const languageSelector = document.getElementById('languageSelector');
+            if (languageSelector) {
+                languageSelector.addEventListener('change', function() {
+                    currentLanguage = this.value;
+                    updateLanguage();
+                    loadCategories();
+                    loadFoods();
+                    if (currentUser) {
+                        setUserLanguage(currentLanguage);
+                    }
+                });
+            }
+
+            // Search
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.trim();
+                    if (query.length >= 2) {
+                        searchFoods(query);
+                    } else {
+                        loadFoods(currentCategory);
+                    }
+                });
+            }
+
+            // Auth form
+            const authForm = document.getElementById('authForm');
+            if (authForm) {
+                authForm.addEventListener('submit', handleAuth);
+            }
+
+            // Checkout form
+            const checkoutForm = document.getElementById('checkoutForm');
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', handleCheckout);
+            }
+
+            // Close modals on outside click
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('active');
+                }
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal.active').forEach(modal => {
+                        modal.classList.remove('active');
+                    });
+                    
+                    const cartSidebar = document.getElementById('cartSidebar');
+                    if (cartSidebar) {
+                        cartSidebar.classList.remove('open');
+                    }
+                }
+                
+                if (e.ctrlKey && e.key === '/') {
+                    e.preventDefault();
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) {
+                        searchInput.focus();
+                    }
+                }
+            });
+        }
+
+        // Language functions
+        function updateLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    element.placeholder = translations[currentLanguage][key];
+                }
+            });
+
+            document.querySelectorAll('select option[data-i18n]').forEach(option => {
+                const key = option.getAttribute('data-i18n');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    option.textContent = translations[currentLanguage][key];
+                }
+            });
+        }
+
+        // API functions
+        async function apiRequest(endpoint, options = {}) {
+            const url = `${API_BASE_URL}${endpoint}`;
+            const headers = {
+                'Content-Type': 'application/json',
+                'Accept-Language': currentLanguage,
+                ...options.headers
+            };
+
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    ...options,
+                    headers
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.detail || `HTTP ${response.status}`);
+                }
+
+                return await response.json();
+            } catch (error) {
+                console.error('API Request failed:', error);
+                throw error;
+            }
+        }
+
+        async function validateToken() {
+            try {
+                const user = await apiRequest('/api/profile');
+                currentUser = user;
+                updateAuthUI();
+            } catch (error) {
+                token = null;
+                localStorage.removeItem('token');
+                currentUser = null;
+                updateAuthUI();
+            }
+        }
+
+        async function setUserLanguage(language) {
+            try {
+                await apiRequest('/api/settings/language', {
+                    method: 'POST',
+                    body: JSON.stringify({ language })
+                });
+            } catch (error) {
+                console.error('Failed to set user language:', error);
+            }
+        }
+
+        // Auth functions
+        function showAuthModal() {
+            if (currentUser) {
+                logout();
+            } else {
+                const modal = document.getElementById('authModal');
+                if (modal) {
+                    modal.classList.add('active');
+                }
+            }
+        }
+
+        function switchAuthMode() {
+            isAuthMode = isAuthMode === 'login' ? 'register' : 'login';
+            
+            const title = document.getElementById('authModalTitle');
+            const submitBtn = document.getElementById('authSubmitBtn');
+            const switchText = document.getElementById('authSwitchText');
+            const switchLink = document.getElementById('authSwitchLink');
+            const fullNameGroup = document.getElementById('fullNameGroup');
+            const emailGroup = document.getElementById('emailGroup');
+
+            if (isAuthMode === 'register') {
+                if (title) title.textContent = translations[currentLanguage].register;
+                if (submitBtn) submitBtn.textContent = translations[currentLanguage].register;
+                if (switchText) switchText.textContent = translations[currentLanguage].have_account;
+                if (switchLink) switchLink.textContent = translations[currentLanguage].login;
+                if (fullNameGroup) fullNameGroup.classList.remove('hidden');
+                if (emailGroup) emailGroup.classList.remove('hidden');
+            } else {
+                if (title) title.textContent = translations[currentLanguage].login;
+                if (submitBtn) submitBtn.textContent = translations[currentLanguage].login;
+                if (switchText) switchText.textContent = translations[currentLanguage].no_account;
+                if (switchLink) switchLink.textContent = translations[currentLanguage].register;
+                if (fullNameGroup) fullNameGroup.classList.add('hidden');
+                if (emailGroup) emailGroup.classList.add('hidden');
+            }
+        }
+
+        async function handleAuth(e) {
+            e.preventDefault();
+            
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                let endpoint = '/api/login';
+                let body = { number: phoneNumber, password };
+
+                if (isAuthMode === 'register') {
+                    endpoint = '/api/register';
+                    body.full_name = document.getElementById('fullName').value;
+                    body.email = document.getElementById('email').value;
+                    body.language = currentLanguage;
+                }
+
+                const response = await apiRequest(endpoint, {
+                    method: 'POST',
+                    body: JSON.stringify(body)
+                });
+
+                token = response.token;
+                localStorage.setItem('token', token);
+                
+                currentUser = await apiRequest('/api/profile');
+                
+                updateAuthUI();
+                closeModal('authModal');
+                showNotification('success', isAuthMode === 'login' ? 'Tizimga muvaffaqiyatli kirdingiz' : 'Ro\'yxatdan o\'tish muvaffaqiyatli');
+                
+                const authForm = document.getElementById('authForm');
+                if (authForm) authForm.reset();
+                
+            } catch (error) {
+                showNotification('error', error.message);
+            }
+        }
+
+        function logout() {
+            token = null;
+            currentUser = null;
+            localStorage.removeItem('token');
+            updateAuthUI();
+            showNotification('info', 'Tizimdan chiqildi');
+        }
+
+        function updateAuthUI() {
+            const authBtnText = document.getElementById('authBtnText');
+
+            if (currentUser) {
+                if (authBtnText) authBtnText.textContent = translations[currentLanguage].logout;
+            } else {
+                if (authBtnText) authBtnText.textContent = translations[currentLanguage].login;
+                
+                const currentPage = document.querySelector('.page.active');
+                if (currentPage && currentPage.id !== 'foods-page') {
+                    showPage('foods');
+                }
+            }
+        }
+
+        // Page navigation
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const selectedPage = document.getElementById(`${pageName}-page`);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+
+            if (pageName === 'orders') {
+                loadOrders();
+            } else if (pageName === 'profile') {
+                loadProfile();
+            } else if (pageName === 'admin') {
+                loadAdminData();
+            }
+        }
+
+        // Categories functions
+        async function loadCategories() {
+            try {
+                categories = await apiRequest('/api/categories');
+                renderCategories();
+            } catch (error) {
+                console.error('Failed to load categories:', error);
+            }
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('categoriesContainer');
+            if (!container) return;
+            
+            let html = `<div class="category-pill active" onclick="filterByCategory('', this)">${translations[currentLanguage].all}</div>`;
+            
+            categories.forEach(category => {
+                html += `<div class="category-pill" onclick="filterByCategory('${category.key}', this)">${category.name}</div>`;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function filterByCategory(categoryKey, buttonElement) {
+            document.querySelectorAll('.category-pill').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            if (buttonElement) {
+                buttonElement.classList.add('active');
+            }
+
+            currentCategory = categoryKey;
+            updateCategoryTitle(categoryKey);
+            loadFoods(categoryKey);
+        }
+
+        function updateCategoryTitle(categoryKey) {
+            const titleElement = document.getElementById('currentCategoryTitle');
+            if (!titleElement) return;
+
+            if (!categoryKey) {
+                titleElement.textContent = translations[currentLanguage].all_foods;
+            } else {
+                const category = categories.find(c => c.key === categoryKey);
+                titleElement.textContent = category ? category.name : translations[currentLanguage].all_foods;
+            }
+        }
+
+        // Foods functions
+        async function loadFoods(category = '') {
+            const foodsLoading = document.getElementById('foodsLoading');
+            const foodsGrid = document.getElementById('foodsGrid');
+            
+            if (foodsLoading) foodsLoading.style.display = 'flex';
+            if (foodsGrid) foodsGrid.style.display = 'none';
+
+            try {
+                let endpoint = '/api/foods/localized';
+                if (category) {
+                    endpoint += `?category=${category}`;
+                }
+                
+                foods = await apiRequest(endpoint);
+                renderFoods();
+            } catch (error) {
+                console.error('Failed to load foods:', error);
+                showNotification('error', 'Ovqatlarni yuklashda xatolik');
+            } finally {
+                if (foodsLoading) foodsLoading.style.display = 'none';
+                if (foodsGrid) foodsGrid.style.display = 'grid';
+            }
+        }
+
+        async function searchFoods(query) {
+            try {
+                const results = await apiRequest(`/api/search?q=${encodeURIComponent(query)}`);
+                foods = results.results;
+                renderFoods();
+                
+                const titleElement = document.getElementById('currentCategoryTitle');
+                if (titleElement) {
+                    titleElement.textContent = `Qidiruv natijalari: "${query}"`;
+                }
+            } catch (error) {
+                console.error('Search failed:', error);
+            }
+        }
+
+        function renderFoods() {
+            const container = document.getElementById('foodsGrid');
+            if (!container) return;
+            
+            if (foods.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gray-500);">
+                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; color: var(--gray-300);"></i>
+                        <p>Ovqatlar topilmadi</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            foods.forEach((food, index) => {
+                const stars = generateStars(food.rating || 0);
+                const isAvailable = food.isThere !== false;
+                const isNew = index < 3; // First 3 items as "new"
+                
+                html += `
+                    <div class="food-card">
+                        <div class="food-image-container">
+                            <img src="${food.imageUrl || generatePlaceholderImage(food.name)}" alt="${food.name}">
+                            ${isNew ? `<div class="new-badge">${translations[currentLanguage].new}</div>` : ''}
+                        </div>
+                        <div class="food-card-content">
+                            <div class="rating">
+                                <span class="stars">${stars}</span>
+                                <span class="rating-count">(${food.review_count || 0})</span>
+                            </div>
+                            <h3>${food.name}</h3>
+                            <p class="food-description">${food.description}</p>
+                            <div class="food-card-footer">
+                                <div class="price">${(food.price || 0).toLocaleString()} so'm</div>
+                                <button class="add-to-cart-btn" onclick="addToCart('${food.id}')" ${!isAvailable ? 'disabled' : ''}>
+                                    ${!isAvailable ? 'Tugagan' : translations[currentLanguage].add_to_cart}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        function generatePlaceholderImage(name) {
+            return `data:image/svg+xml;base64,${btoa(`
+                <svg width="280" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="280" height="200" fill="#f8f9fa"/>
+                    <text x="140" y="100" text-anchor="middle" dy=".3em" font-family="sans-serif" font-size="16" fill="#6c757d">${name}</text>
+                </svg>
+            `)}`;
+        }
+
+        // Cart functions
+        function addToCart(foodId) {
+            const food = foods.find(f => f.id === foodId);
+            if (!food || food.isThere === false) return;
+
+            const existingItem = cart.find(item => item.id === foodId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: foodId,
+                    name: food.name,
+                    price: food.price,
+                    imageUrl: food.imageUrl,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartUI();
+            showNotification('success', `${food.name} savatga qo'shildi`);
+        }
+
+        function removeFromCart(foodId) {
+            cart = cart.filter(item => item.id !== foodId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartQuantity(foodId, change) {
+            const item = cart.find(item => item.id === foodId);
+            if (!item) return;
+
+            item.quantity += change;
+            
+            if (item.quantity <= 0) {
+                removeFromCart(foodId);
+            } else {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+                cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+
+            const container = document.getElementById('cartItems');
+            const footer = document.getElementById('cartFooter');
+            
+            if (container) {
+                if (cart.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-bag"></i>
+                            <p>${translations[currentLanguage].empty_cart}</p>
+                        </div>
+                    `;
+                    if (footer) footer.style.display = 'none';
+                } else {
+                    let html = '';
+                    cart.forEach(item => {
+                        html += `
+                            <div class="cart-item">
+                                <img src="${item.imageUrl || generatePlaceholderImage(item.name)}" alt="${item.name}">
+                                <div class="cart-item-info">
+                                    <div class="cart-item-name">${item.name}</div>
+                                    <div class="cart-item-price">${(item.price * item.quantity).toLocaleString()} so'm</div>
+                                    <div class="cart-item-controls">
+                                        <button class="quantity-btn" onclick="updateCartQuantity('${item.id}', -1)">-</button>
+                                        <span class="quantity-display">${item.quantity}</span>
+                                        <button class="quantity-btn" onclick="updateCartQuantity('${item.id}', 1)">+</button>
+                                        <button class="remove-btn" onclick="removeFromCart('${item.id}')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                    if (footer) footer.style.display = 'block';
+                }
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const totalAmount = document.getElementById('totalAmount');
+            const checkoutTotal = document.getElementById('checkoutTotal');
+            
+            if (totalAmount) {
+                totalAmount.textContent = `${total.toLocaleString()} so'm`;
+            }
+            if (checkoutTotal) {
+                checkoutTotal.textContent = `${total.toLocaleString()} so'm`;
+            }
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cartSidebar');
+            if (sidebar) {
+                sidebar.classList.toggle('open');
+            }
+        }
+
+        // Checkout functions
+        function showCheckoutModal() {
+            if (cart.length === 0) {
+                showNotification('error', 'Savat bo\'sh');
+                return;
+            }
+
+            if (!currentUser) {
+                showNotification('error', 'Buyurtma berish uchun tizimga kiring');
+                showAuthModal();
+                return;
+            }
+
+            const modal = document.getElementById('checkoutModal');
+            if (modal) {
+                modal.classList.add('active');
+            }
+        }
+
+        function handleDeliveryTypeChange() {
+            const deliveryType = document.getElementById('deliveryType').value;
+            const addressGroup = document.getElementById('deliveryAddressGroup');
+            const pickupGroup = document.getElementById('pickupCodeGroup');
+            const tableGroup = document.getElementById('tableGroup');
+
+            if (addressGroup) addressGroup.classList.add('hidden');
+            if (pickupGroup) pickupGroup.classList.add('hidden');
+            if (tableGroup) tableGroup.classList.add('hidden');
+
+            if (deliveryType === 'delivery' && addressGroup) {
+                addressGroup.classList.remove('hidden');
+            } else if (deliveryType === 'own_withdrawal' && pickupGroup) {
+                pickupGroup.classList.remove('hidden');
+            } else if (deliveryType === 'atTheRestaurant' && tableGroup) {
+                tableGroup.classList.remove('hidden');
+            }
+        }
+
+        async function handleCheckout(e) {
+            e.preventDefault();
+
+            const deliveryType = document.getElementById('deliveryType').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const specialInstructions = document.getElementById('specialInstructions').value;
+
+            // Prepare delivery info
+            let toGive = {};
+            if (deliveryType === 'delivery') {
+                const address = document.getElementById('deliveryAddress').value;
+                if (!address.trim()) {
+                    showNotification('error', 'Yetkazib berish manzilini kiriting');
+                    return;
+                }
+                toGive.delivery = address;
+            } else if (deliveryType === 'own_withdrawal') {
+                const pickupCode = document.getElementById('pickupCode').value || 'PICKUP';
+                toGive.own_withdrawal = pickupCode;
+            } else if (deliveryType === 'atTheRestaurant') {
+                const tableId = document.getElementById('tableSelect').value;
+                toGive.atTheRestaurant = tableId;
+            }
+
+            // Prepare food items
+            const foodIds = cart.map(item => {
+                const obj = {};
+                obj[item.id] = item.quantity;
+                return obj;
+            });
+
+            const orderData = {
+                food_ids: foodIds,
+                to_give: toGive,
+                payment_method: paymentMethod,
+                special_instructions: specialInstructions || null
+            };
+
+            try {
+                const order = await apiRequest('/api/orders', {
+                    method: 'POST',
+                    body: JSON.stringify(orderData)
+                });
+
+                // Clear cart
+                cart = [];
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartUI();
+
+                // Close modals
+                closeModal('checkoutModal');
+                toggleCart();
+
+                // Show success message
+                showNotification('success', 'Buyurtma muvaffaqiyatli berildi!');
+
+                // Reset form
+                const checkoutForm = document.getElementById('checkoutForm');
+                if (checkoutForm) checkoutForm.reset();
+
+                // Show orders page
+                showPage('orders');
+
+            } catch (error) {
+                showNotification('error', error.message);
+            }
+        }
+
+        // Orders functions
+        async function loadOrders() {
+            const container = document.getElementById('ordersContainer');
+            const loading = document.getElementById('ordersLoading');
+
+            if (loading) loading.style.display = 'flex';
+            if (container) container.innerHTML = '';
+
+            try {
+                const orders = await apiRequest('/api/orders');
+                renderOrders(orders);
+            } catch (error) {
+                console.error('Failed to load orders:', error);
+                if (container) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 3rem; color: var(--gray-500);">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem; color: var(--gray-300);"></i>
+                            <p>Buyurtmalarni yuklashda xatolik</p>
+                        </div>
+                    `;
+                }
+            } finally {
+                if (loading) loading.style.display = 'none';
+            }
+        }
+
+        function renderOrders(orders) {
+            const container = document.getElementById('ordersContainer');
+            if (!container) return;
+
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: var(--gray-500);">
+                        <i class="fas fa-shopping-bag" style="font-size: 3rem; margin-bottom: 1rem; color: var(--gray-300);"></i>
+                        <p>Buyurtmalar yo'q</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            orders.forEach(order => {
+                const statusClass = `status-${order.status}`;
+                const statusText = getStatusText(order.status);
+                
+                html += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div>
+                                <h3>Buyurtma #${order.order_id}</h3>
+                                <p style="opacity: 0.8; margin-top: 0.25rem;">${order.order_time}</p>
+                            </div>
+                            <span class="order-status ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="order-content">
+                            <div class="order-items" style="margin-bottom: 1rem;">
+                                ${order.foods.map(food => `
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--gray-200);">
+                                        <span style="font-weight: 500;">${food.name} x${food.count}</span>
+                                        <span style="color: var(--primary-color); font-weight: 600;">${food.total_price.toLocaleString()} so'm</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div style="border-top: 2px solid var(--gray-200); padding-top: 1rem; text-align: right;">
+                                <div style="font-size: 1.25rem; font-weight: 700; color: var(--gray-900);">
+                                    Jami: ${order.total_price.toLocaleString()} so'm
+                                </div>
+                            </div>
+                            ${order.special_instructions ? `
+                                <div style="margin-top: 1rem; padding: 1rem; background: var(--gray-100); border-radius: 8px;">
+                                    <strong>Maxsus ko'rsatmalar:</strong> ${order.special_instructions}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function getStatusText(status) {
+            const statusTexts = {
+                uz: {
+                    pending: 'Kutilmoqda',
+                    confirmed: 'Tasdiqlangan',
+                    preparing: 'Tayyorlanmoqda',
+                    ready: 'Tayyor',
+                    delivered: 'Yetkazilgan',
+                    cancelled: 'Bekor qilingan'
+                },
+                ru: {
+                    pending: 'Ожидание',
+                    confirmed: 'Подтвержден',
+                    preparing: 'Готовится',
+                    ready: 'Готов',
+                    delivered: 'Доставлен',
+                    cancelled: 'Отменен'
+                },
+                en: {
+                    pending: 'Pending',
+                    confirmed: 'Confirmed',
+                    preparing: 'Preparing',
+                    ready: 'Ready',
+                    delivered: 'Delivered',
+                    cancelled: 'Cancelled'
+                }
+            };
+
+            return statusTexts[currentLanguage]?.[status] || status;
+        }
+
+        // Profile functions
+        async function loadProfile() {
+            const container = document.getElementById('profileContainer');
+            if (!container) return;
+            
+            if (!currentUser) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: var(--gray-500);">
+                        <i class="fas fa-user" style="font-size: 3rem; margin-bottom: 1rem; color: var(--gray-300);"></i>
+                        <p>Tizimga kiring</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div style="background: var(--white); border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 2rem;">
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div class="form-group">
+                            <label>To'liq ism</label>
+                            <input type="text" value="${currentUser.full_name || ''}" readonly style="background: var(--gray-100);">
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon raqami</label>
+                            <input type="text" value="${currentUser.number || ''}" readonly style="background: var(--gray-100);">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" value="${currentUser.email || 'Ko\'rsatilmagan'}" readonly style="background: var(--gray-100);">
+                        </div>
+                        <div class="form-group">
+                            <label>Rol</label>
+                            <input type="text" value="${currentUser.role || ''}" readonly style="background: var(--gray-100);">
+                        </div>
+                        <div class="form-group">
+                            <label>Ro'yxatdan o'tgan sana</label>
+                            <input type="text" value="${currentUser.created_at || ''}" readonly style="background: var(--gray-100);">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Admin functions
+        async function loadAdminData() {
+            if (!currentUser || currentUser.role !== 'admin') {
+                const adminContainer = document.getElementById('adminContainer');
+                if (adminContainer) {
+                    adminContainer.innerHTML = `
+                        <div style="text-align: center; padding: 3rem; color: var(--gray-500);">
+                            <i class="fas fa-lock" style="font-size: 3rem; margin-bottom: 1rem; color: var(--gray-300);"></i>
+                            <p>Admin huquqlari kerak</p>
+                        </div>
+                    `;
+                }
+                return;
+            }
+
+            try {
+                const analytics = await apiRequest('/api/analytics');
+                renderAdminDashboard(analytics);
+            } catch (error) {
+                console.error('Failed to load admin data:', error);
+            }
+        }
+
+        function renderAdminDashboard(analytics) {
+            const container = document.getElementById('adminContainer');
+            if (!container) return;
+            
+            container.innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: var(--white); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">${analytics.total_orders || 0}</div>
+                        <div style="opacity: 0.9;">Jami buyurtmalar</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, var(--accent-color), #e76f51); color: var(--white); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">${(analytics.total_revenue || 0).toLocaleString()}</div>
+                        <div style="opacity: 0.9;">Jami daromad (so'm)</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: var(--white); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">${analytics.user_statistics?.total_users || 0}</div>
+                        <div style="opacity: 0.9;">Jami foydalanuvchilar</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #10b981, #059669); color: var(--white); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">${analytics.user_statistics?.active_users || 0}</div>
+                        <div style="opacity: 0.9;">Faol foydalanuvchilar</div>
+                    </div>
+                </div>
+                
+                <div style="background: var(--white); border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--gray-900);">Admin boshqaruvi</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <button class="btn" onclick="loadAdminOrders()" style="padding: 1rem; justify-self: stretch;">
+                            <i class="fas fa-list-alt" style="margin-right: 0.5rem;"></i>
+                            Buyurtmalarni boshqarish
+                        </button>
+                        <button class="btn" onclick="loadAdminFoods()" style="padding: 1rem; justify-self: stretch;">
+                            <i class="fas fa-utensils" style="margin-right: 0.5rem;"></i>
+                            Ovqatlarni boshqarish
+                        </button>
+                        <button class="btn" onclick="showNotification('info', 'Ushbu funksiya ishlab chiqilmoqda')" style="padding: 1rem; justify-self: stretch;">
+                            <i class="fas fa-chart-bar" style="margin-right: 0.5rem;"></i>
+                            Hisobotlar
+                        </button>
+                        <button class="btn" onclick="showNotification('info', 'Ushbu funksiya ishlab chiqilmoqda')" style="padding: 1rem; justify-self: stretch;">
+                            <i class="fas fa-cog" style="margin-right: 0.5rem;"></i>
+                            Sozlamalar
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadAdminOrders() {
+            showNotification('info', 'Admin buyurtmalar bo\'limi ishlab chiqilmoqda');
+        }
+
+        async function loadAdminFoods() {
+            showNotification('info', 'Admin ovqatlar bo\'limi ishlab chiqilmoqda');
+        }
+
+        // Utility functions
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        function showNotification(type, message) {
+            const notification = document.getElementById('notification');
+            if (!notification) return;
+            
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 4000);
+        }
+
+        // Network status detection
+        window.addEventListener('online', function() {
+            showNotification('success', 'Internet aloqasi qayta tiklandi');
+        });
+
+        window.addEventListener('offline', function() {
+            showNotification('error', 'Internet aloqasi uzildi');
+        });
+
+        // Auto-refresh for orders (every 30 seconds when on orders page)
+        setInterval(function() {
+            const currentPage = document.querySelector('.page.active');
+            if (currentPage && currentPage.id === 'orders-page' && currentUser) {
+                loadOrders();
+            }
+        }, 30000);
+
+        // Initialize the application
+        console.log('🍽️ Amur Restaurant App initialized successfully! 🚀');
+    </script>
+</body>
+</html>

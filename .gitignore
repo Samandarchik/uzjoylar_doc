@@ -1,0 +1,124 @@
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Build directories
+bin/
+dist/
+build/
+
+# Dependencies
+vendor/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Coverage reports
+coverage.out
+coverage.html
+*.cover
+
+# Test cache
+.cache/
+
+# Temporary files
+tmp/
+temp/
+
+# Uploads (if contains sensitive data)
+uploads/*
+!uploads/.gitkeep
+
+# Docker
+.dockerignore
+
+# Air (hot reload tool)
+.air.toml
+tmp/
+
+# GoLand
+.idea/
+
+# VS Code
+.vscode/
+
+# Profiling
+*.prof
+
+# Database files (for future use)
+*.db
+*.sqlite
+*.sqlite3
+
+# JWT secrets (production)
+secrets/
+keys/
+
+# Backup files
+*.bak
+*.backup
+
+# Lock files
+go.sum.lock
+
+# Configuration files with sensitive data
+config/production.yaml
+config/local.yaml
+
+# Certificates
+*.pem
+*.key
+*.crt
+
+# Documentation build
+docs/build/
+
+# MacOS
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# Windows
+[Tt]humbs.db
+[Tt]humbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk

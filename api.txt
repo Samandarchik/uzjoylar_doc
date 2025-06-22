@@ -1,0 +1,481 @@
+http://0.0.0.0:8000/api/login
+{
+  "number": "770451118",
+  "password": "samandar"
+}	
+Response body
+Download
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NzA0NTExMTgiLCJyb2xlIjoidXNlciIsInVzZXJfaWQiOiJ1c2VyX2I1ZjAzYzc5IiwiZXhwIjoxNzQ5OTM1Nzc0fQ.Mc8QQ2oLijrdtFDpJkPuvNYRPxt2LQ0lOoGxGBxTRlE",
+  "role": "user",
+  "user_id": "user_b5f03c79",
+  "language": "uz"
+}
+
+http://0.0.0.0:8000/api/foods
+[
+  {
+    "id": "amur_1",
+    "name": "Beef Barbecue",
+    "category": "shashlik",
+    "price": 23000,
+    "description": "Very delicious beef barbecue",
+    "isThere": true,
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/moloti.jpg?alt=media&token=dc4fbd64-95c4-4a94-b56a-c232df091394",
+    "ingredients": [
+      "Beef",
+      "Onion",
+      "Spices"
+    ],
+    "allergens": [],
+    "rating": 4.5,
+    "review_count": 15,
+    "preparation_time": 20,
+    "category_name": "Barbecue"
+  },
+  {
+    "id": "amur_2",
+    "name": "Chicken Barbecue",
+    "category": "shashlik",
+    "price": 18000,
+    "description": "Barbecue made from tender chicken meat",
+    "isThere": true,
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/olivye.png?alt=media&token=4463f00e-089d-48e3-ac97-96f3ff05a8b6",
+    "ingredients": [
+      "Chicken",
+      "Onion",
+      "Spices"
+    ],
+    "allergens": [],
+    "rating": 4.2,
+    "review_count": 12,
+    "preparation_time": 15,
+    "category_name": "Barbecue"
+  },
+  {
+    "id": "amur_3",
+    "name": "Pilaf",
+    "category": "milliy_taomlar",
+    "price": 15000,
+    "description": "Traditional Uzbek pilaf with beef",
+    "isThere": true,
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/ovishi.jpg?alt=media&token=c620f5d3-db4e-47fc-97b3-5a319793132e",
+    "ingredients": [
+      "Rice",
+      "Beef",
+      "Carrot",
+      "Onion"
+    ],
+    "allergens": [],
+    "rating": 4.8,
+    "review_count": 25,
+    "preparation_time": 30,
+    "category_name": "National dishes"
+  },
+  {
+    "id": "amur_4",
+    "name": "Lagman",
+    "category": "milliy_taomlar",
+    "price": 12000,
+    "description": "Traditional Uzbek lagman with vegetables",
+    "isThere": true,
+    "imageUrl": "https://example.com/lagmon.jpg",
+    "ingredients": [
+      "Noodles",
+      "Beef",
+      "Vegetables"
+    ],
+    "allergens": [
+      "Gluten"
+    ],
+    "rating": 4.3,
+    "review_count": 18,
+    "preparation_time": 25,
+    "category_name": "National dishes"
+  },
+  {
+    "id": "amur_5",
+    "name": "Beef Barbecue 2",
+    "category": "shashlik",
+    "price": 23000,
+    "description": "Very delicious beef barbecue",
+    "isThere": true,
+    "imageUrl": "https://example.com/moloti.jpg",
+    "ingredients": [
+      "Beef",
+      "Onion",
+      "Spices"
+    ],
+    "allergens": [],
+    "rating": 4.5,
+    "review_count": 15,
+    "preparation_time": 20,
+    "category_name": "Barbecue"
+  }
+]
+http://0.0.0.0:8000/api/foods?category=shashlik
+[
+  {
+    "id": "amur_1",
+    "name": "Beef Barbecue",
+    "category": "shashlik",
+    "price": 23000,
+    "description": "Very delicious beef barbecue",
+    "isThere": true,
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/moloti.jpg?alt=media&token=dc4fbd64-95c4-4a94-b56a-c232df091394",
+    "ingredients": [
+      "Beef",
+      "Onion",
+      "Spices"
+    ],
+    "allergens": [],
+    "rating": 4.5,
+    "review_count": 15,
+    "preparation_time": 20,
+    "category_name": "Barbecue"
+  },
+  {
+    "id": "amur_2",
+    "name": "Chicken Barbecue",
+    "category": "shashlik",
+    "price": 18000,
+    "description": "Barbecue made from tender chicken meat",
+    "isThere": true,
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/olivye.png?alt=media&token=4463f00e-089d-48e3-ac97-96f3ff05a8b6",
+    "ingredients": [
+      "Chicken",
+      "Onion",
+      "Spices"
+    ],
+    "allergens": [],
+    "rating": 4.2,
+    "review_count": 12,
+    "preparation_time": 15,
+    "category_name": "Barbecue"
+  },
+  {
+    "id": "amur_5",
+    "name": "Beef Barbecue 2",
+    "category": "shashlik",
+    "price": 23000,
+    "description": "Very delicious beef barbecue",
+    "isThere": true,
+    "imageUrl": "https://example.com/moloti.jpg",
+    "ingredients": [
+      "Beef",
+      "Onion",
+      "Spices"
+    ],
+    "allergens": [],
+    "rating": 4.5,
+    "review_count": 15,
+    "preparation_time": 20,
+    "category_name": "Barbecue"
+  },
+  {
+    "id": "amur_6",
+    "name": "Chicken Barbecue 2",
+    "category": "shashlik",
+    "price": 18000,
+    "description": "Barbecue made from tender chicken meat",
+    "isThere": true,
+    "imageUrl": "https://example.com/tovuq.jpg",
+    "ingredients": [
+      "Chicken",
+      "Onion",
+      "Spices"
+    ],
+    "allergens": [],
+    "rating": 4.2,
+    "review_count": 12,
+    "preparation_time": 15,
+    "category_name": "Barbecue"
+  }
+]
+
+http://0.0.0.0:8000/api/foods?search=Beef%20Barbecue
+[
+  {
+    "id": "amur_1",
+    "name": "Beef Barbecue",
+    "category": "shashlik",
+    "price": 23000,
+    "description": "Very delicious beef barbecue",
+    "isThere": true,
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/moloti.jpg?alt=media&token=dc4fbd64-95c4-4a94-b56a-c232df091394",
+    "ingredients": [
+      "Beef",
+      "Onion",
+      "Spices"
+    ],
+    "allergens": [],
+    "rating": 4.5,
+    "review_count": 15,
+    "preparation_time": 20,
+    "category_name": "Barbecue"
+  },
+  {
+    "id": "amur_5",
+    "name": "Beef Barbecue 2",
+    "category": "shashlik",
+    "price": 23000,
+    "description": "Very delicious beef barbecue",
+    "isThere": true,
+    "imageUrl": "https://example.com/moloti.jpg",
+    "ingredients": [
+      "Beef",
+      "Onion",
+      "Spices"
+    ],
+    "allergens": [],
+    "rating": 4.5,
+    "review_count": 15,
+    "preparation_time": 20,
+    "category_name": "Barbecue"
+  }
+]
+http://0.0.0.0:8000/api/foods/amur_1
+{
+  "id": "amur_1",
+  "name": "Beef Barbecue",
+  "category": "shashlik",
+  "price": 23000,
+  "description": "Very delicious beef barbecue",
+  "isThere": true,
+  "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/moloti.jpg?alt=media&token=dc4fbd64-95c4-4a94-b56a-c232df091394",
+  "ingredients": [
+    "Beef",
+    "Onion",
+    "Spices"
+  ],
+  "allergens": [],
+  "rating": 4.5,
+  "review_count": 15,
+  "preparation_time": 20,
+  "category_name": "Barbecue"
+}
+curl -X 'POST' \
+  'http://0.0.0.0:8000/api/orders' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NzA0NTExMTgiLCJyb2xlIjoidXNlciIsInVzZXJfaWQiOiJ1c2VyX2I1ZjAzYzc5IiwiZXhwIjoxNzQ5OTM1Nzc0fQ.Mc8QQ2oLijrdtFDpJkPuvNYRPxt2LQ0lOoGxGBxTRlE' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "food_ids": [
+    {"amur_1":5},{"amur_3":5}
+  ],
+  "to_give": {"atTheRestaurant":"70a53b0ac3264fce88d9a4b7d3a7fa5e"},
+  "payment_method": "cash",
+  "special_instructions": "Assalomu alekum Iltimos tezroq yuboring"
+}'
+{
+  "order_id": "2025-06-14-1",
+  "user_number": "770451118",
+  "user_name": "Ibragimov Samandar",
+  "foods": [
+    {
+      "id": "amur_1",
+      "name": "Beef Barbecue",
+      "category": "Barbecue",
+      "price": 23000,
+      "description": "Very delicious beef barbecue",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/moloti.jpg?alt=media&token=dc4fbd64-95c4-4a94-b56a-c232df091394",
+      "count": 5,
+      "total_price": 115000
+    },
+    {
+      "id": "amur_3",
+      "name": "Pilaf",
+      "category": "National dishes",
+      "price": 15000,
+      "description": "Traditional Uzbek pilaf with beef",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/ovishi.jpg?alt=media&token=c620f5d3-db4e-47fc-97b3-5a319793132e",
+      "count": 5,
+      "total_price": 75000
+    }
+  ],
+  "total_price": 190000,
+  "order_time": "2025-06-14 02:25:18",
+  "delivery_type": "atTheRestaurant",
+  "delivery_info": {
+    "type": "atTheRestaurant",
+    "table_id": "70a53b0ac3264fce88d9a4b7d3a7fa5e",
+    "table_name": "Zal-1 Stol-4"
+  },
+  "status": "pending",
+  "payment_info": {
+    "method": "cash",
+    "status": "pending",
+    "amount": 190000,
+    "transaction_id": null,
+    "payment_time": null
+  },
+  "special_instructions": "Assalomu alekum Iltimos tezroq yuboring",
+  "estimated_time": 30,
+  "delivered_at": null
+}
+'GET' \
+  'http://0.0.0.0:8000/api/orders'
+  [
+  {
+    "order_id": "2025-06-14-1",
+    "user_number": "770451118",
+    "user_name": "Ibragimov Samandar",
+    "foods": [
+      {
+        "id": "amur_1",
+        "name": "Beef Barbecue",
+        "category": "Barbecue",
+        "price": 23000,
+        "description": "Very delicious beef barbecue",
+        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/moloti.jpg?alt=media&token=dc4fbd64-95c4-4a94-b56a-c232df091394",
+        "count": 5,
+        "total_price": 115000
+      },
+      {
+        "id": "amur_3",
+        "name": "Pilaf",
+        "category": "National dishes",
+        "price": 15000,
+        "description": "Traditional Uzbek pilaf with beef",
+        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/ovishi.jpg?alt=media&token=c620f5d3-db4e-47fc-97b3-5a319793132e",
+        "count": 5,
+        "total_price": 75000
+      }
+    ],
+    "total_price": 190000,
+    "order_time": "2025-06-14 02:25:18",
+    "delivery_type": "atTheRestaurant",
+    "delivery_info": {
+      "type": "atTheRestaurant",
+      "table_id": "70a53b0ac3264fce88d9a4b7d3a7fa5e",
+      "table_name": "Zal-1 Stol-4"
+    },
+    "status": "pending",
+    "payment_info": {
+      "method": "cash",
+      "status": "pending",
+      "amount": 190000,
+      "transaction_id": null,
+      "payment_time": null
+    },
+    "special_instructions": "Assalomu alekum Iltimos tezroq yuboring",
+    "estimated_time": 30,
+    "delivered_at": null
+  }
+]
+curl -X 'GET' \
+  'http://0.0.0.0:8000/api/orders/2025-06-14-1' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NzA0NTExMTgiLCJyb2xlIjoidXNlciIsInVzZXJfaWQiOiJ1c2VyX2I1ZjAzYzc5IiwiZXhwIjoxNzQ5OTM1Nzc0fQ.Mc8QQ2oLijrdtFDpJkPuvNYRPxt2LQ0lOoGxGBxTRlE'
+  {
+  "order_id": "2025-06-14-1",
+  "user_number": "770451118",
+  "user_name": "Ibragimov Samandar",
+  "foods": [
+    {
+      "id": "amur_1",
+      "name": "Beef Barbecue",
+      "category": "Barbecue",
+      "price": 23000,
+      "description": "Very delicious beef barbecue",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/moloti.jpg?alt=media&token=dc4fbd64-95c4-4a94-b56a-c232df091394",
+      "count": 5,
+      "total_price": 115000
+    },
+    {
+      "id": "amur_3",
+      "name": "Pilaf",
+      "category": "National dishes",
+      "price": 15000,
+      "description": "Traditional Uzbek pilaf with beef",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/amur-restoran.firebasestorage.app/o/ovishi.jpg?alt=media&token=c620f5d3-db4e-47fc-97b3-5a319793132e",
+      "count": 5,
+      "total_price": 75000
+    }
+  ],
+  "total_price": 190000,
+  "order_time": "2025-06-14 02:25:18",
+  "delivery_type": "atTheRestaurant",
+  "delivery_info": {
+    "type": "atTheRestaurant",
+    "table_id": "70a53b0ac3264fce88d9a4b7d3a7fa5e",
+    "table_name": "Zal-1 Stol-4"
+  },
+  "status": "pending",
+  "payment_info": {
+    "method": "cash",
+    "status": "pending",
+    "amount": 190000,
+    "transaction_id": null,
+    "payment_time": null
+  },
+  "special_instructions": "Assalomu alekum Iltimos tezroq yuboring",
+  "estimated_time": 30,
+  "delivered_at": null
+}
+curl -X 'GET' \
+  'http://0.0.0.0:8000/api/notifications' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NzA0NTExMTgiLCJyb2xlIjoidXNlciIsInVzZXJfaWQiOiJ1c2VyX2I1ZjAzYzc5IiwiZXhwIjoxNzQ5OTM1Nzc0fQ.Mc8QQ2oLijrdtFDpJkPuvNYRPxt2LQ0lOoGxGBxTRlE'
+
+  [
+  {
+    "id": "notif_356f5f10",
+    "user_id": "user_b5f03c79",
+    "title": "Buyurtma ID: #2025-06-14-1",
+    "message": "Buyurtmangiz tasdiqlandi!",
+    "is_read": false,
+    "created_at": "2025-06-14 02:25:18",
+    "type": "order"
+  }
+]
+
+curl -X 'PUT' \
+  'http://0.0.0.0:8000/api/notifications/notif_356f5f10/read' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NzA0NTExMTgiLCJyb2xlIjoidXNlciIsInVzZXJfaWQiOiJ1c2VyX2I1ZjAzYzc5IiwiZXhwIjoxNzQ5OTM1Nzc0fQ.Mc8QQ2oLijrdtFDpJkPuvNYRPxt2LQ0lOoGxGBxTRlE'
+  {
+  "message": "Notification marked as read"
+}
+curl -X 'POST' \
+  'http://0.0.0.0:8000/api/tickets' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NzA0NTExMTgiLCJyb2xlIjoidXNlciIsInVzZXJfaWQiOiJ1c2VyX2I1ZjAzYzc5IiwiZXhwIjoxNzQ5OTM1Nzc0fQ.Mc8QQ2oLijrdtFDpJkPuvNYRPxt2LQ0lOoGxGBxTRlE' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "subject": "Ofisant kerak",
+  "message": "Assalomu alekum Menga zal-1 stol-2 ofisant kerak"
+}'
+{
+  "id": "ticket_91601094",
+  "user_id": "user_b5f03c79",
+  "subject": "Ofisant kerak",
+  "message": "Assalomu alekum Menga zal-1 stol-2 ofisant kerak",
+  "status": "open",
+  "created_at": "2025-06-14 02:33:22",
+  "resolved_at": null
+}
+curl -X 'GET' \
+  'http://0.0.0.0:8000/api/tickets' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NzA0NTExMTgiLCJyb2xlIjoidXNlciIsInVzZXJfaWQiOiJ1c2VyX2I1ZjAzYzc5IiwiZXhwIjoxNzQ5OTM1Nzc0fQ.Mc8QQ2oLijrdtFDpJkPuvNYRPxt2LQ0lOoGxGBxTRlE'
+  [
+  {
+    "id": "ticket_91601094",
+    "user_id": "user_b5f03c79",
+    "subject": "Ofisant kerak",
+    "message": "Assalomu alekum Menga zal-1 stol-2 ofisant kerak",
+    "status": "open",
+    "created_at": "2025-06-14 02:33:22",
+    "resolved_at": null
+  },
+  {
+    "id": "ticket_9c10369d",
+    "user_id": "user_b5f03c79",
+    "subject": "Ofisant kerak",
+    "message": "Assalomu alekum Menga zal-1 stol-2 ofisant kerak",
+    "status": "open",
+    "created_at": "2025-06-14 02:33:11",
+    "resolved_at": null
+  }
+]
