@@ -2756,7 +2756,7 @@ func main() {
 	// Server port
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8000"
+		port = "8080"
 	}
 
 	log.Printf("🚀 Restaurant API - Complete Version with Integer IDs:")
